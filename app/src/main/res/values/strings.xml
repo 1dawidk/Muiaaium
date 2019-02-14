@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Muiaaium</string>
+
+    <string name="btn_record">Record</string>
+    <string name="btn_play_real">Play human</string>
+    <string name="btn_play_catlike">Play cat</string>
+</resources>

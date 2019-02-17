@@ -14,6 +14,7 @@ public class Player {
 
     public Player(int sampleRate){
         this.sampleRate= sampleRate;
+        isRunning=false;
     }
 
     public void start(final ShortBuffer samples){
@@ -33,6 +34,20 @@ public class Player {
                         AudioFormat.ENCODING_PCM_16BIT,
                         bufferSize,
                         AudioTrack.MODE_STREAM);
+
+                audioTrack.setPlaybackPositionUpdateListener(new AudioTrack.OnPlaybackPositionUpdateListener() {
+                    @Override
+                    public void onMarkerReached(AudioTrack track) {
+
+                    }
+
+                    @Override
+                    public void onPeriodicNotification(AudioTrack track) {
+
+                    }
+                });
+
+                //audioTrack.setNotificationMarkerPosition(samples.limit());
 
                 audioTrack.play();
 
@@ -77,7 +92,7 @@ public class Player {
     }
 
     public boolean isPlaying(){
-        return false;
+        return isRunning;
     }
 
     public int getSampleRate() {

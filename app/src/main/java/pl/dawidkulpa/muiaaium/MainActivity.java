@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private Recorder recorder;
     private Player player;
 
+    //Views
     private Button recordBtn;
+    private ProgressBar progressBar;
 
     private boolean isRecording;
 
@@ -58,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         player= new Player(44100);
 
         isRecording= false;
+
+        progressBar= findViewById(R.id.progressbar);
     }
 
     private void getRecordingPermission() {
@@ -86,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
             //TODO: Get recorded buffer
             recordings.add(new Recording(recorder.getAudioBuffer(), recorder.getAudioBufferSize(), recorder.getSampleRate()));
             rla.notifyDataSetChanged();
+            progressBar.setVisibility(View.GONE);
         } else {
             recordBtn.setText(R.string.btn_stop_record);
             recorder.start();
             isRecording=true;
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 
